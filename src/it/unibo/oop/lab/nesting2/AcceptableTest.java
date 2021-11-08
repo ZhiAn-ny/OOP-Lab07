@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 import it.unibo.oop.lab.nesting2.Acceptor.ElementNotAcceptedException;
+import it.unibo.oop.lab.nesting2.Acceptor.EndNotAcceptedException;
 
 /**
  * This is the JUnit test for {@link it.unibo.oop.lab.nesting2.Acceptable}
@@ -22,6 +23,7 @@ public class AcceptableTest {
      */
     @Test
     public void test1() {
+    	System.out.println("Test1");
         /*
          * Correct acceptance of [10, 20, 30, 40]
          */
@@ -29,12 +31,17 @@ public class AcceptableTest {
         /*
          * the following needs instantiation
          */
-        final Acceptable<Integer> acc = null;
+        final Acceptable<Integer> acc = new OneListAcceptable<>(list);
         final Acceptor<Integer> acceptor = acc.acceptor();
         for (final Integer el: list) {
             acceptor.accept(el);
         }
+        try {
         acceptor.end();
+        } catch (EndNotAcceptedException e) {
+        	fail("There are still some elements left: " + e.getMessage());
+        }
+        
     }
 
     /**
@@ -43,11 +50,12 @@ public class AcceptableTest {
      */
     @Test
     public void test2() {
+    	System.out.println("Test2");
         /*
          * Failing acceptance
          */
         final List<Integer> list = Arrays.asList(10, 20, 30, 40);
-        final Acceptable<Integer> acc = null;
+        final Acceptable<Integer> acc = new OneListAcceptable<>(list);
         final Acceptor<Integer> acceptor = acc.acceptor();
         try {
             for (final Integer el: list) {
@@ -75,11 +83,12 @@ public class AcceptableTest {
      */
     @Test
     public void test3() {
+    	System.out.println("Test3");
         /*
          * Exception due to early end
          */
         final List<Integer> list = Arrays.asList(10, 20, 30, 40);
-        final Acceptable<Integer> acc = null;
+        final Acceptable<Integer> acc = new OneListAcceptable<>(list);
         final Acceptor<Integer> acceptor = acc.acceptor();
         try {
             acceptor.accept(10);
