@@ -44,22 +44,6 @@ public final class TestAnonymousComparator {
         }
         return true;
     }
-    
-    private static void sortByAge(List<User> list) {
-    	Collections.sort(list, new Comparator<User>(){
-        	public int compare(User a, User b) {
-        		return Integer.compare(a.getAge(), b.getAge());
-        	}
-        });
-    }
-    
-    private static void sortByAgeReversed(List<User> list) {
-    	Collections.sort(list, new Comparator<User>(){
-        	public int compare(User a, User b) {
-        		return Integer.compare(b.getAge(), a.getAge());
-        	}
-        });
-    }
 
     /**
      * @param args
@@ -92,7 +76,14 @@ public final class TestAnonymousComparator {
          * 
          * REFER TO LESSON 13-Advanced-Mechanisms.pdf, slide 41
          */
-        sortByAge(denzelUsers);
+        
+        var comp = new Comparator<User>(){
+        	public int compare(User a, User b) {
+        		return Integer.compare(a.getAge(), b.getAge());
+        	}
+        };
+    	Collections.sort(denzelUsers, comp);
+        
         
         /*
          * expected Result
@@ -124,7 +115,7 @@ public final class TestAnonymousComparator {
          * NOTE: in order to sort a list think about a method of the utility
          * class Collections
          */
-        sortByAgeReversed(rossiUsers);
+        Collections.sort(rossiUsers, comp.reversed());
         
         /*
          * expected Result
