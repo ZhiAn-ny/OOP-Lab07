@@ -17,12 +17,6 @@ import it.unibo.oop.lab.socialnetwork.User;
  * It is the same class as previous exercises but with new methods to be
  * implemented
  * 
- * 
- * 1) Reuse the same code you have already written in the previous
- * SportSocialNetworkUserImpl as far as methods implemented before are concerned
- * 
- * 2) complete the implementation of the new methods as explained below
- * 
  * @param <U>
  *            specific {@link User} type
  */
@@ -63,10 +57,6 @@ public class Sport2SocialNetworkUserImpl<U extends User> extends SocialNetworkUs
         this.sports = new HashSet<>();
     }
 
-    /*
-     * [METHODS] TO BE DEFINED AS DONE IN PREVIOUS EXERCISE
-     */
-
     /**
      * Add a new sport followed by this user: if the user already likes or does
      * the sport, nothing happens.
@@ -89,10 +79,6 @@ public class Sport2SocialNetworkUserImpl<U extends User> extends SocialNetworkUs
     public boolean likesSport(final Sport s) {
         return this.sports.contains(s);
     }
-
-    /*
-     * [METHODS] NEW METHODS TO IMPLEMENT FROM SCRATCH
-     */
 
     /**
      * Returns the set of individual sports followed/practiced by this user: a
@@ -118,7 +104,13 @@ public class Sport2SocialNetworkUserImpl<U extends User> extends SocialNetworkUs
      * @return the set of sport practiced in a given place
      */
      public Set<Sport> getSportPracticedInPlace(Place p) {
-    	 return null; 
+    	 Set<Sport> inPlace = new HashSet<>();
+    	 for (Sport s : this.sports) {
+    		 if (s.getPlace() == p) {
+    			 inPlace.add(s);
+    		 }
+    	 }
+    	 return inPlace; 
      }
      
 }
