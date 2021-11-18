@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import it.unibo.oop.lab.nesting2.Acceptor.ElementNotAcceptedException;
 import it.unibo.oop.lab.nesting2.Acceptor.EndNotAcceptedException;
 
 /**
